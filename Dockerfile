@@ -1,4 +1,4 @@
-FROM maven:3.8.4-eclipse-temurin-21 AS build
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
@@ -8,4 +8,9 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
-ARG AWS_ACESS_KEY_ID
+ENV AWS_REGION=us-east-1
+ENV AWS_S3_BUCKET_NAME=qrcode-demo-bucket
+ENV AWS_ACCESS_KEY_ID=""
+ENV AWS_SECRET_ACCESS_KEY=""
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

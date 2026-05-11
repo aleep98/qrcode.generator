@@ -27,6 +27,7 @@ try {
     return ResponseEntity.ok(response);
 
 } catch (Exception e) {
+    System.out.println("Error generating QR code: " + e.getMessage());
     return ResponseEntity.internalServerError().build();
 }
     }
